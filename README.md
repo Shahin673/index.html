@@ -1,2 +1,379 @@
-# index.html
-CIVIL engeener Shahin mostafa
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শাহিন মোস্তাফা - ব্যক্তিগত ওয়েবসাইট</title>
+    <style>
+        /* General Styles */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; overflow-x: hidden; }
+        
+        /* Welcome Screen */
+        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #7a7a7a url('https://www.transparenttextures.com/patterns/wall-4-light.png'); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        #welcome-screen h1 { font-size: 3rem; color: #fff; text-shadow: 2px 2px 4px #000; border: 4px solid #555; padding: 20px; background: rgba(0,0,0,0.5); }
+        
+        /* Header with Cartoon Road Background */
+        header { 
+            /* এখানে কার্টুন ফুল ও রাস্তার ছবির লিংক বসানো হয়েছে */
+            background: url('https://img.freepik.com/free-vector/spring-landscape-with-dirt-road-green-grass-flowers_107791-9104.jpg') center/cover no-repeat; 
+            color: white; 
+            padding: 40px 0; 
+            text-align: center; 
+            position: relative;
+        }
+        /* Background overlay to make text readable */
+        header::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);
+        }
+        .name-title { position: relative; font-size: 8vw; white-space: nowrap; margin: 0; font-weight: bold; text-shadow: 3px 3px 6px #000; z-index: 1; }
+        
+        /* Marquee Notice */
+        .notice-bar { background-color: #e74c3c; color: white; padding: 10px; font-size: 1.2rem; font-weight: bold; }
+        
+        /* Image Slider with Zoom effect */
+        .slider-container { width: 100%; overflow: hidden; margin: 20px 0; position: relative; height: 300px; background: #ddd; cursor: pointer; }
+        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slider-track img { min-width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .slider-container.zoomed .slider-track img { transform: scale(1.5); cursor: zoom-in; }
+        
+        /* Main Menu Buttons (Different Colors) */
+        .main-menu { max-width: 800px; margin: 20px auto; display: flex; flex-direction: column; gap: 15px; padding: 0 20px; }
+        .menu-btn { padding: 20px; font-size: 1.5rem; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; text-align: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .menu-btn:hover { transform: translateY(-3px); }
+        
+        .bg-1 { background-color: #2980b9; } /* পরিচয় */
+        .bg-2 { background-color: #27ae60; } /* শিক্ষা জীবন */
+        .bg-3 { background-color: #8e44ad; } /* দক্ষতা */
+        .bg-4 { background-color: #d35400; } /* কর্ম জীবন */
+        .bg-5 { background-color: #16a085; } /* স্বজন */
+        .bg-6 { background-color: #c0392b; } /* মনের কথা */
+        .bg-7 { background-color: #34495e; } /* ডেভলপার */
+
+        /* Full Page Panels */
+        .page-panel { display: none; max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .back-btn { background: #e74c3c; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; cursor: pointer; border-radius: 5px; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px; }
+        .back-btn:hover { background: #c0392b; }
+
+        /* Highlighted Text */
+        .highlight { background-color: #f1c40f; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+        /* Family Tree Chart */
+        .family-chart { display: flex; flex-direction: column; gap: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .family-box { background: #3498db; color: white; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px; }
+        .family-nodes { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .node { background: #ecf0f1; border: 2px solid #3498db; padding: 8px 15px; border-radius: 20px; color: #2c3e50; font-size: 0.9rem; }
+
+        /* NID & Skills Box */
+        .nid-container { display: flex; gap: 20px; margin-top: 15px; }
+        .nid-box { width: 150px; height: 150px; border: 2px dashed #7f8c8d; display: flex; justify-content: center; align-items: center; color: #7f8c8d; background: #ecf0f1; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 15px 0; }
+        .skill-item { background: #ecf0f1; padding: 10px; border-radius: 5px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; border: 1px solid #bdc3c7; }
+
+        /* Complaint Box */
+        #complaint-box-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        .complaint-title-btn { background: #c0392b; color: white; padding: 10px 15px; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); white-space: nowrap; }
+        #complaint-form { display: none; position: absolute; bottom: 50px; right: 0; width: 300px; background: white; border: 2px solid #c0392b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        #complaint-form textarea { width: 100%; height: 100px; margin-bottom: 10px; padding: 5px; box-sizing: border-box; }
+        #complaint-form button { background: #c0392b; color: white; border: none; padding: 8px 15px; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .view-complaints-btn { background: #34495e !important; }
+
+        /* Social Icons & Developer Panel Contacts */
+        .social-footer { text-align: center; padding: 20px; background: #2c3e50; margin-top: 40px; }
+        .social-footer a { color: white; font-size: 1.2rem; margin: 0 10px; text-decoration: none; display: inline-block; }
+        .contact-links a { display: block; margin: 10px 0; color: #2980b9; text-decoration: none; font-weight: bold; background: #ecf0f1; padding: 10px; border-radius: 5px; }
+
+        .last-update { text-align: center; font-size: 0.8rem; color: #7f8c8d; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <h1>স্বাগতম</h1>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1 class="name-title">শাহিন মোস্তাফা</h1>
+    </header>
+
+    <!-- Marquee Notice -->
+    <div class="notice-bar">
+        <marquee behavior="scroll" direction="left">✨ স্বাগতম আমার ব্যক্তিগত ওয়েবসাইটে! এটি নিয়মিত আপডেট করা হয়। আপনার যেকোনো মতামত অভিযোগ বক্সে জানাতে পারেন। ✨</marquee>
+    </div>
+
+    <!-- Image Slider -->
+    <div class="slider-container" id="slider-container">
+        <div class="slider-track" id="slider">
+            <img src="1.jpg" alt="1">
+            <img src="2.jpg" alt="2">
+            <img src="https://via.placeholder.com/800x300/2ecc71/ffffff?text=ছবি+৩" alt="3">
+            <img src="https://via.placeholder.com/800x300/f1c40f/ffffff?text=ছবি+৪" alt="4">
+            <img src="https://via.placeholder.com/800x300/9b59b6/ffffff?text=ছবি+৫" alt="5">
+            <img src="https://via.placeholder.com/800x300/34495e/ffffff?text=ছবি+৬" alt="6">
+            <img src="https://via.placeholder.com/800x300/16a085/ffffff?text=ছবি+৭" alt="7">
+            <img src="https://via.placeholder.com/800x300/e67e22/ffffff?text=ছবি+৮" alt="8">
+            <img src="https://via.placeholder.com/800x300/95a5a6/ffffff?text=ছবি+৯" alt="9">
+            <img src="https://via.placeholder.com/800x300/2c3e50/ffffff?text=ছবি+১০" alt="10">
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div class="main-menu" id="main-menu">
+        <button class="menu-btn bg-1" onclick="openPanel('panel-1')">পরিচয়</button>
+        <button class="menu-btn bg-2" onclick="openPanel('panel-2')">শিক্ষা জীবন</button>
+        <button class="menu-btn bg-3" onclick="openPanel('panel-3')">দক্ষতা</button>
+        <button class="menu-btn bg-4" onclick="openPanel('panel-4')">কর্ম জীবন</button>
+        <button class="menu-btn bg-5" onclick="openPanel('panel-5')">স্বজন</button>
+        <button class="menu-btn bg-6" onclick="openPanel('panel-6')">শাহীন মুস্তাফার মনের কথা</button>
+        <button class="menu-btn bg-7" onclick="openPanel('panel-7')">ওয়েব ডেভলপার</button>
+    </div>
+
+    <!-- Panel 1: পরিচয় -->
+    <div class="page-panel" id="panel-1">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>পরিচয়</h2>
+        <p><strong>নাম:</strong> শাহিন মোস্তাফা</p>
+        <p><strong>ডাকনাম:</strong> বেশিরভাগ মানুষের কাছে সুলতান, বাড়িতে সোনা</p>
+        <p><strong>মাতার নাম:</strong> খুরশিদা বেগম</p>
+        <p><strong>পিতার নাম:</strong> মোহাম্মদ জালাল</p>
+        <p><strong>ভাইবোন:</strong> ৩ ভাই ১ বোন। বড় ভাই আমি, মেঝ ভাই সজিব মোস্তাফা, তার ছোট বোন সারজিনা আফরিন এবং তার ছোট ভাই আল মোস্তাফা।</p>
+        <p><strong>ঠিকানা:</strong> চট্টগ্রাম বিভাগ, কক্সবাজার জেলা, মহেশখালী উপজেলা, কালারমারছড়া ইউনিয়ন, মিজ্জিরপাড়া গ্রাম।</p>
+        <p><strong>জাতীয়তাবাদী:</strong> বাংলাদেশী</p>
+        <p><strong>ধর্ম:</strong> ইসলাম (রসুলের প্রেমে আসক্ত)</p>
+        <p><strong>বৈবাহিক অবস্থা:</strong> অবিবাহিত (মনের মত মিলাতে পারলে যে কোন মুহুর্তে বিবাহ করতে রাজি)।</p>
+        <p><strong>NID:</strong></p>
+        <div class="nid-container">
+            <div class="nid-box">NID Front</div>
+            <div class="nid-box">NID Back</div>
+        </div>
+    </div>
+
+    <!-- Panel 2: শিক্ষা জীবন -->
+    <div class="page-panel" id="panel-2">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>শিক্ষা জীবন</h2>
+        <p>প্রাক-প্রাথমিক পড়ালেখা করেন তার মায়ের কাছ থেকে এবং তার পর <span class="highlight">মিজ্জিরপাড়া সরকারি প্রাথমিক বিদ্যালয়ে</span> ভর্তি হয়। সেখান থেকে এক ধাপে প্রাথমিক লেখাপড়া শেষ করে।</p>
+        <p>পরে <span class="highlight">কালারমারছড়া উচ্চ বিদ্যালয়ে</span> বিজ্ঞান বিভাগ নিয়ে মাধ্যমিক শেষ করে।</p>
+        <p>এরপর ভর্তি হয় বাংলাদেশ কারিগরি শিক্ষা বোর্ড এর আওতাভুক্ত <span class="highlight">পলিটেকনিক ইনস্টিটিউট</span> এ সিভিল ইঞ্জিনিয়ার নিয়ে। সেখানে ভালো ফলাফল এমন কী সর্বোচ্চ জিপিএ ৩.৭৯ আসে।</p>
+        <p>প্রাইমারিতে তার পছন্দের স্যার ছিল ম্যাডাম চাবুক্কুর নাহার ও এসএম সিরাজুল হক।</p>
+        <p>জীবনের প্রথম শিক্ষক আমার মা।</p>
+    </div>
+
+    <!-- Panel 3: দক্ষতা -->
+    <div class="page-panel" id="panel-3">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>দক্ষতা</h2>
+        <div class="skills-grid">
+            <div class="skill-item">📐 ১/ ড্রয়িং ও ডিজাইন</div>
+            <div class="skill-item">🔭 ২/ সার্ভে ও লেভেলিং</div>
+            <div class="skill-item">🧮 ৩/ এস্টিমেটিং ও কস্টিং</div>
+            <!-- বাকি দক্ষতাগুলো আগের মতোই বসাতে পারবেন এখানে -->
+            <div class="skill-item">🌐 ৪৩/ ওয়েবসাইট তৈরি করা</div>
+            <div class="skill-item">🚗 ৪৪/ যেকোনো গাড়ির ড্রাইভিং করা (সাইকেল, মোটরসাইকেল, টেক্সি, ট্রাক, ট্রেইন)</div>
+        </div>
+    </div>
+
+    <!-- Panel 4: কর্ম জীবন -->
+    <div class="page-panel" id="panel-4">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>কর্ম জীবন</h2>
+        <h2 style="color: #2980b9; text-align: center; font-size: 1.8rem;">সরকারি সিভিল ইঞ্জিনিয়ার ( ১০ গ্রেড ) প্রার্থী</h2>
+    </div>
+
+    <!-- Panel 5: স্বজন (Chart Style) -->
+    <div class="page-panel" id="panel-5">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>স্বজন (পারিবারিক চার্ট)</h2>
+        
+        <div class="family-chart">
+            <div class="family-box">মায়ের দিক (নানা বাড়ি)</div>
+            <p style="text-align:center;"><strong>নানা:</strong> কোরবান আলি | <strong>নানী:</strong> রাবেয়া খাতুন</p>
+            <div class="family-nodes">
+                <div class="node">মা: খুরশিদা বেগম (বড়)</div>
+                <div class="node">খালা: বেবি আক্তার</div>
+                <div class="node">খালা: পারবিনা</div>
+                <div class="node">মামা: নুরুল আমিন হেলালি</div>
+            </div>
+        </div>
+
+        <div class="family-chart">
+            <div class="family-box">বাবার দিক (দাদা বাড়ি)</div>
+            <p style="text-align:center;"><strong>দাদা:</strong> আব্দু শুক্কুর | <strong>দাদী:</strong> ছারা খাতুন</p>
+            <div class="family-nodes">
+                <div class="node">বাবা: মোহাম্মদ জালাল</div>
+                <div class="node">চাচা: ছলিমুল্লা</div>
+                <div class="node">চাচা: মোহাম্মদ ফারুক</div>
+                <div class="node">ফুফু: রোকসানা বেগম</div>
+                <div class="node">ফুফু: মোশিদা</div>
+                <div class="node">ফুফু: মোসারকা</div>
+                <div class="node">ফুফু: ইউরকা</div>
+                <div class="node">ফুফু: ইফ্ফাত ফাতেমা</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 6: মনের কথা -->
+    <div class="page-panel" id="panel-6">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>শাহীন মুস্তাফার মনের কথা</h2>
+        <p>রররররললল (আপাতত ১০ হাজার শব্দের জন্য জায়গা রাখা হলো।)</p>
+    </div>
+
+    <!-- Panel 7: ডেভলপার -->
+    <div class="page-panel" id="panel-7">
+        <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
+        <h2>ওয়েব ডেভলপার</h2>
+        <div style="text-align: center; margin-top: 10px;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: #ccc; margin: 0 auto; display: flex; align-items: center; justify-content: center;">ডেভলপার ছবি</div>
+        </div>
+        <p><strong>নাম:</strong> শাহিন মোস্তাফা</p>
+        <p><strong>ঠিকানা:</strong> কক্সবাজার, মহেশখালী, কালারমারছড়া</p>
+        <div class="contact-links">
+            <a href="tel:01842330673">📞 01842330673 (Call)</a>
+            <a href="tel:01621741925">📞 01621741925 (Call)</a>
+            <a href="tel:09638987792">📞 09638987792 (Call)</a>
+            <a href="https://wa.me/8801842330673" target="_blank">💬 WhatsApp এ মেসেজ দিন</a>
+        </div>
+    </div>
+
+    <!-- Draggable Complaint Box -->
+    <div id="complaint-box-widget">
+        <div class="complaint-title-btn" id="complaint-toggle-btn">✉️ অভিযোগ বক্স</div>
+        <div id="complaint-form">
+            <h4 style="margin-top:0;">শাহিন মুস্তাফা কে আপনি কি কি অভিযোগ জানাতে চান তা এখানে লিখুন:</h4>
+            <textarea placeholder="এখানে অভিযোগ লিখুন (১০০০ শব্দ)..."></textarea>
+            <input type="file" style="margin-bottom: 10px; width: 100%;">
+            <button onclick="alert('অভিযোগ জমা দেওয়া হয়েছে!')">জমা দিন</button>
+            <hr>
+            <button class="view-complaints-btn" onclick="viewComplaints()">অভিযোগ দেখুন (Admin)</button>
+        </div>
+    </div>
+
+    <!-- Social Footer -->
+    <footer class="social-footer">
+        <a href="https://www.facebook.com/profile.php?id=100068679007563" target="_blank">📘 Facebook</a>
+        <a href="https://youtube.com/@shahinmostafa9898" target="_blank">📺 YouTube</a>
+        <a href="https://wa.me/8801842330673" target="_blank">💬 WhatsApp</a>
+        <a href="tel:01842330673">📱 Telegram/Imo</a>
+        <a href="https://www.linkedin.com/in/shahin-sultan-a78bb1257" target="_blank">💼 LinkedIn</a>
+        <div class="last-update" id="update-date">সর্বশেষ আপডেট: </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Welcome Screen
+        setTimeout(() => {
+            const welcome = document.getElementById('welcome-screen');
+            welcome.style.opacity = '0';
+            setTimeout(() => { welcome.style.display = 'none'; }, 500);
+        }, 2000);
+
+        // 2. Open / Close Panels (Pages Mode)
+        const mainMenu = document.getElementById('main-menu');
+        const sliderSection = document.getElementById('slider-container');
+        const panels = document.querySelectorAll('.page-panel');
+
+        function openPanel(panelId) {
+            mainMenu.style.display = 'none';
+            sliderSection.style.display = 'none';
+            panels.forEach(p => p.style.display = 'none');
+            document.getElementById(panelId).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function closePanel() {
+            panels.forEach(p => p.style.display = 'none');
+            mainMenu.style.display = 'flex';
+            sliderSection.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // 3. Slider Pause and Zoom logic
+        const slider = document.getElementById('slider');
+        const sliderContainer = document.getElementById('slider-container');
+        let slideIndex = 0;
+        let slideInterval;
+        let isPaused = false;
+
+        function startSlider() {
+            slideInterval = setInterval(() => {
+                if (!isPaused) {
+                    slideIndex++;
+                    if (slideIndex >= 10) slideIndex = 0;
+                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                }
+            }, 1000);
+        }
+        startSlider();
+
+        // Pause on press (mouse or touch) and zoom
+        function pauseAndZoom() {
+            isPaused = true;
+            sliderContainer.classList.add('zoomed');
+        }
+        // Resume on release
+        function resumeSlider() {
+            isPaused = false;
+            sliderContainer.classList.remove('zoomed');
+        }
+
+        sliderContainer.addEventListener('mousedown', pauseAndZoom);
+        sliderContainer.addEventListener('mouseup', resumeSlider);
+        sliderContainer.addEventListener('mouseleave', resumeSlider);
+        
+        sliderContainer.addEventListener('touchstart', pauseAndZoom);
+        sliderContainer.addEventListener('touchend', resumeSlider);
+
+        // 4. Complaint Box Toggle & Draggable
+        const complaintToggle = document.getElementById('complaint-toggle-btn');
+        const complaintForm = document.getElementById('complaint-form');
+        const widget = document.getElementById('complaint-box-widget');
+
+        complaintToggle.addEventListener('click', () => {
+            complaintForm.style.display = complaintForm.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // 5. Admin View Complaints (Simulated Password)
+        function viewComplaints() {
+            let pass = prompt("পাসওয়ার্ড দিন:");
+            if(pass === "sultan@#3876") {
+                alert("স্বাগতম শাহিন মোস্তাফা! আপনার অভিযোগের তালিকা লোড হচ্ছে...");
+            } else {
+                alert("ভুল পাসওয়ার্ড!");
+            }
+        }
+
+        // Dragging Logic
+        let isDragging = false; let currentX; let currentY; let initialX; let initialY; let xOffset = 0; let yOffset = 0;
+        complaintToggle.addEventListener("mousedown", dragStart);
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("mousemove", drag);
+        complaintToggle.addEventListener("touchstart", dragStart, {passive: false});
+        document.addEventListener("touchend", dragEnd);
+        document.addEventListener("touchmove", drag, {passive: false});
+
+        function dragStart(e) {
+            if (e.type === "touchstart") { initialX = e.touches[0].clientX - xOffset; initialY = e.touches[0].clientY - yOffset; } 
+            else { initialX = e.clientX - xOffset; initialY = e.clientY - yOffset; }
+            isDragging = true;
+        }
+        function dragEnd(e) { initialX = currentX; initialY = currentY; isDragging = false; }
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                if (e.type === "touchmove") { currentX = e.touches[0].clientX - initialX; currentY = e.touches[0].clientY - initialY; } 
+                else { currentX = e.clientX - initialX; currentY = e.clientY - initialY; }
+                xOffset = currentX; yOffset = currentY;
+                setTranslate(currentX, currentY, widget);
+            }
+        }
+        function setTranslate(xPos, yPos, el) { el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)"; }
+
+        // Last Updated Date
+        document.getElementById('update-date').innerText += " " + new Date(document.lastModified).toLocaleDateString('bn-BD');
+    </script>
+</body>
+</html>
