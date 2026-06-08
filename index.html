@@ -8,20 +8,39 @@
         /* General Styles */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; overflow-x: hidden; }
         
-        /* Welcome Screen */
-        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #7a7a7a url('https://www.transparenttextures.com/patterns/wall-4-light.png'); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
-        #welcome-screen h1 { font-size: 3rem; color: #fff; text-shadow: 2px 2px 4px #000; border: 4px solid #555; padding: 20px; background: rgba(0,0,0,0.5); }
+        /* Premium Welcome Screen */
+        #welcome-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); 
+            z-index: 10000; display: flex; justify-content: center; align-items: center; 
+            transition: opacity 0.8s ease, visibility 0.8s; 
+        }
+        #welcome-screen h1 { 
+            font-size: 2.5rem; 
+            text-align: center;
+            background: linear-gradient(45deg, #007aff, #00c6ff, #007aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGlow 2s infinite ease-in-out, bounceIn 1.2s ease-out forwards;
+            text-shadow: 0px 0px 20px rgba(0, 122, 255, 0.5);
+            margin: 0 20px;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(0,122,255,0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(0,122,255,0.7)); }
+        }
+        @media (max-width: 600px) { #welcome-screen h1 { font-size: 1.8rem; } }
         
         /* Header with Cartoon Road Background */
         header { 
-            /* এখানে কার্টুন ফুল ও রাস্তার ছবির লিংক বসানো হয়েছে */
             background: url('https://img.freepik.com/free-vector/spring-landscape-with-dirt-road-green-grass-flowers_107791-9104.jpg') center/cover no-repeat; 
-            color: white; 
-            padding: 40px 0; 
-            text-align: center; 
-            position: relative;
+            color: white; padding: 40px 0; text-align: center; position: relative;
         }
-        /* Background overlay to make text readable */
         header::before {
             content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);
         }
@@ -30,37 +49,69 @@
         /* Marquee Notice */
         .notice-bar { background-color: #e74c3c; color: white; padding: 10px; font-size: 1.2rem; font-weight: bold; }
         
-        /* Image Slider with Zoom effect */
-        .slider-container { width: 100%; overflow: hidden; margin: 20px 0; position: relative; height: 300px; background: #ddd; cursor: pointer; }
+        /* Fixed Image Slider (Ensures Full Image Visibility) */
+        .slider-container { 
+            width: 90%; max-width: 600px; margin: 20px auto; overflow: hidden; 
+            position: relative; height: 380px; background: #111; border-radius: 16px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2); cursor: pointer; 
+        }
         .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
-        .slider-track img { min-width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .slider-container.zoomed .slider-track img { transform: scale(1.5); cursor: zoom-in; }
+        .slider-track img { min-width: 100%; height: 100%; object-fit: contain; background: #111; transition: transform 0.3s ease; }
+        .slider-container.zoomed .slider-track img { transform: scale(1.4); cursor: zoom-in; }
         
-        /* Main Menu Buttons (Different Colors) */
-        .main-menu { max-width: 800px; margin: 20px auto; display: flex; flex-direction: column; gap: 15px; padding: 0 20px; }
-        .menu-btn { padding: 20px; font-size: 1.5rem; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; text-align: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .menu-btn:hover { transform: translateY(-3px); }
-        
-        .bg-1 { background-color: #2980b9; } /* পরিচয় */
-        .bg-2 { background-color: #27ae60; } /* শিক্ষা জীবন */
-        .bg-3 { background-color: #8e44ad; } /* দক্ষতা */
-        .bg-4 { background-color: #d35400; } /* কর্ম জীবন */
-        .bg-5 { background-color: #16a085; } /* স্বজন */
-        .bg-6 { background-color: #c0392b; } /* মনের কথা */
-        .bg-7 { background-color: #34495e; } /* ডেভলপার */
+        /* Standard Panel Menu Grid (Restored with Text Labels) */
+        .main-menu-grid { 
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; 
+            max-width: 500px; margin: 30px auto; padding: 0 15px; 
+        }
+        .menu-btn { 
+            background: white; border: 2px solid #34495e; color: #2c3e50; 
+            padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 10px; 
+            cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .menu-btn:hover { background: #34495e; color: white; transform: translateY(-2px); }
+        .menu-btn:active { transform: translateY(0); }
+
+        /* iPhone/iOS-style Social Media App Grid/Dock (No text, only icons) */
+        .ios-dock-container {
+            background: #2c3e50; padding: 30px 15px; text-align: center; margin-top: 40px;
+        }
+        .ios-social-grid { 
+            display: flex; justify-content: center; gap: 20px; 
+            max-width: 450px; margin: 0 auto; padding: 15px; 
+            background: rgba(255, 255, 255, 0.1); border-radius: 24px;
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.2), 0 8px 16px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .ios-app-link { 
+            width: 62px; height: 62px; border-radius: 15px; display: flex; 
+            justify-content: center; align-items: center; font-size: 1.9rem; 
+            text-decoration: none; box-shadow: 0 6px 12px rgba(0,0,0,0.25); 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ios-app-link:active { transform: scale(0.88); box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
+        @media (max-width: 360px) { .ios-app-link { width: 54px; height: 54px; font-size: 1.6rem; border-radius: 12px; } }
+
+        /* iOS Gradients for Social Apps */
+        .fb-app { background: linear-gradient(135deg, #1877F2, #0052C1); }
+        .yt-app { background: linear-gradient(135deg, #FF0000, #C10000); }
+        .wa-app { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .tg-app { background: linear-gradient(135deg, #26A5E4, #1A74A4); }
+        .li-app { background: linear-gradient(135deg, #0077B5, #004B73); }
 
         /* Full Page Panels */
-        .page-panel { display: none; max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-panel { display: none; max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        .back-btn { background: #e74c3c; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; cursor: pointer; border-radius: 5px; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px; }
+        .back-btn { background: #e74c3c; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; cursor: pointer; border-radius: 6px; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px; font-weight: bold; }
         .back-btn:hover { background: #c0392b; }
 
         /* Highlighted Text */
         .highlight { background-color: #f1c40f; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
 
         /* Family Tree Chart */
-        .family-chart { display: flex; flex-direction: column; gap: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .family-chart { display: flex; flex-direction: column; gap: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
         .family-box { background: #3498db; color: white; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; margin-bottom: 10px; }
         .family-nodes { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .node { background: #ecf0f1; border: 2px solid #3498db; padding: 8px 15px; border-radius: 20px; color: #2c3e50; font-size: 0.9rem; }
@@ -71,6 +122,17 @@
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 15px 0; }
         .skill-item { background: #ecf0f1; padding: 10px; border-radius: 5px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; border: 1px solid #bdc3c7; }
 
+        /* Medical Info Cards Grid */
+        .medical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .med-card { background: #fdfbfb; border-left: 5px solid #ccc; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .med-card h4 { margin: 0 0 10px 0; color: #2c3e50; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .med-card p { margin: 6px 0; font-size: 0.95rem; color: #444; }
+        .med-card.bmi { border-left-color: #f39c12; }
+        .med-card.eyes { border-left-color: #2980b9; }
+        .med-card.blood { border-left-color: #e74c3c; }
+        .med-card.vitals { border-left-color: #27ae60; }
+        .med-card.pulse { border-left-color: #8e44ad; }
+
         /* Complaint Box */
         #complaint-box-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
         .complaint-title-btn { background: #c0392b; color: white; padding: 10px 15px; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); white-space: nowrap; }
@@ -79,32 +141,24 @@
         #complaint-form button { background: #c0392b; color: white; border: none; padding: 8px 15px; cursor: pointer; width: 100%; margin-bottom: 10px; }
         .view-complaints-btn { background: #34495e !important; }
 
-        /* Social Icons & Developer Panel Contacts */
-        .social-footer { text-align: center; padding: 20px; background: #2c3e50; margin-top: 40px; }
-        .social-footer a { color: white; font-size: 1.2rem; margin: 0 10px; text-decoration: none; display: inline-block; }
-        .contact-links a { display: block; margin: 10px 0; color: #2980b9; text-decoration: none; font-weight: bold; background: #ecf0f1; padding: 10px; border-radius: 5px; }
-
-        .last-update { text-align: center; font-size: 0.8rem; color: #7f8c8d; margin-top: 20px; }
+        .contact-links a { display: block; margin: 10px 0; color: #2980b9; text-decoration: none; font-weight: bold; background: #ecf0f1; padding: 10px; border-radius: 5px; text-align: center; }
+        .last-update { text-align: center; font-size: 0.8rem; color: #cbd5e1; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- Welcome Screen -->
     <div id="welcome-screen">
-        <h1>শাহিন মোস্তাফার ওয়েবসাইটে স্বাগতম</h1>
+        <h1>শাহিন মোস্তাফার ওয়েবসাইটে স্বাগতম</h1>
     </div>
 
-    <!-- Header -->
     <header>
         <h1 class="name-title">শাহিন মোস্তাফা</h1>
     </header>
 
-    <!-- Marquee Notice -->
     <div class="notice-bar">
-        <marquee behavior="scroll" direction="left">✨ স্বাগতম আমার ব্যক্তিগত ওয়েবসাইটে! এটি নিয়মিত আপডেট করা হয়। আপনার যেকোনো মতামত অভিযোগ বক্সে জানাতে পারেন। ✨</marquee>
+        <marquee behavior="scroll" direction="left">✨ স্বাগতম আমার ব্যক্তিগত ওয়েবসাইটে! এটি নিয়মিত আপডেট করা হয়। আপনার যেকোনো মতামত অভিযোগ বক্সে জানাতে পারেন। ✨</marquee>
     </div>
 
-    <!-- Image Slider -->
     <div class="slider-container" id="slider-container">
         <div class="slider-track" id="slider">
             <img src="1.jpg" alt="1">
@@ -120,18 +174,17 @@
         </div>
     </div>
 
-    <!-- Main Menu -->
-    <div class="main-menu" id="main-menu">
-        <button class="menu-btn bg-1" onclick="openPanel('panel-1')">পরিচয়</button>
-        <button class="menu-btn bg-2" onclick="openPanel('panel-2')">শিক্ষা জীবন</button>
-        <button class="menu-btn bg-3" onclick="openPanel('panel-3')">দক্ষতা</button>
-        <button class="menu-btn bg-4" onclick="openPanel('panel-4')">কর্ম জীবন</button>
-        <button class="menu-btn bg-5" onclick="openPanel('panel-5')">স্বজন</button>
-        <button class="menu-btn bg-6" onclick="openPanel('panel-6')">শাহীন মুস্তাফার মনের কথা</button>
-        <button class="menu-btn bg-7" onclick="openPanel('panel-7')">ওয়েব ডেভলপার</button>
+    <div class="main-menu-grid" id="main-menu">
+        <button class="menu-btn" onclick="openPanel('panel-1')">👤 পরিচয়</button>
+        <button class="menu-btn" onclick="openPanel('panel-2')">🎓 শিক্ষা জীবন</button>
+        <button class="menu-btn" onclick="openPanel('panel-3')">⚡ দক্ষতা</button>
+        <button class="menu-btn" onclick="openPanel('panel-4')">💼 কর্ম জীবন</button>
+        <button class="menu-btn" onclick="openPanel('panel-5')">👨‍👩‍👦 স্বজন</button>
+        <button class="menu-btn" onclick="openPanel('panel-6')">❤️ মনের কথা</button>
+        <button class="menu-btn" onclick="openPanel('panel-8')">🏥 মেডিকেল তথ্য</button>
+        <button class="menu-btn" onclick="openPanel('panel-7')">💻 ওয়েব ডেভলপার</button>
     </div>
 
-    <!-- Panel 1: পরিচয় -->
     <div class="page-panel" id="panel-1">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>পরিচয়</h2>
@@ -140,8 +193,8 @@
         <p><strong>মাতার নাম:</strong> খুরশিদা বেগম</p>
         <p><strong>পিতার নাম:</strong> মোহাম্মদ জালাল</p>
         <p><strong>ভাইবোন:</strong> ৩ ভাই ১ বোন। বড় ভাই আমি, মেঝ ভাই সজিব মোস্তাফা, তার ছোট বোন সারজিনা আফরিন এবং তার ছোট ভাই আল মোস্তাফা।</p>
-        <p><strong>ঠিকানা:</strong> চট্টগ্রাম বিভাগ, কক্সবাজার জেলা, মহেশখালী উপজেলা, কালারমারছড়া ইউনিয়ন, মিজ্জিরপাড়া গ্রাম।</p>
-        <p><strong>জাতীয়তাবাদী:</strong> বাংলাদেশী</p>
+        <p><strong>ঠিকানা:</strong> চট্টগ্রাম বিভাগ, কক্সবাজার জেলা, মহেশখালী উপজেলা, কালারমারছড়া ইউনিয়ন, miজ্জিরপাড়া গ্রাম।</p>
+        <p><strong>জাতীয়তাবাদ:</strong> বাংলাদেশী</p>
         <p><strong>ধর্ম:</strong> ইসলাম (রসুলের প্রেমে আসক্ত)</p>
         <p><strong>বৈবাহিক অবস্থা:</strong> অবিবাহিত (মনের মত মিলাতে পারলে যে কোন মুহুর্তে বিবাহ করতে রাজি)।</p>
         <p><strong>NID:</strong></p>
@@ -151,7 +204,6 @@
         </div>
     </div>
 
-    <!-- Panel 2: শিক্ষা জীবন -->
     <div class="page-panel" id="panel-2">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>শিক্ষা জীবন</h2>
@@ -162,74 +214,72 @@
         <p>জীবনের প্রথম শিক্ষক আমার মা।</p>
     </div>
 
-    <!-- Panel 3: দক্ষতা -->
     <div class="page-panel" id="panel-3">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>দক্ষতা</h2>
         <div class="skills-grid">
-             <div class="skill-item">📐 ১/ ড্রয়িং ও ডিজাইন</div>
-                <div class="skill-item">🔭 ২/ সার্ভে ও লেভেলিং</div>
-                <div class="skill-item">🧮 ৩/ এস্টিমেটিং ও কস্টিং</div>
-                <div class="skill-item">👷 ৪/ কনস্ট্রাকশন সুপারভিশন</div>
-                <div class="skill-item">🧱 ৫/ ম্যাটেরিয়াল টেস্টিং</div>
-                <div class="skill-item">🏢 ৬/ স্ট্রাকচারাল কনসেপ্ট</div>
-                <div class="skill-item">📁 ৭/ অফিসিয়াল কাজ</div>
-                <div class="skill-item">💻 ৮/ সফটওয়্যার স্কিল</div>
-                <div class="skill-item">🚰 ৯/ প্লাম্বিং ও স্যানিটারি কাজ</div>
-                <div class="skill-item">🛣️ ১০/ রোড ও হাইওয়ে কনস্ট্রাকশন</div>
-                <div class="skill-item">💧 ১১/ ওয়াটার সাপ্লাই ও স্যানিটেশন</div>
-                <div class="skill-item">📊 ১২/ কোয়ান্টিটি সার্ভেয়িং</div>
-                <div class="skill-item">🦺 ১৩/ সেফটি ম্যানেজমেন্ট</div>
-                <div class="skill-item">🌱 ১৪/ Soil Test ও Foundation এর বেসিক</div>
-                <div class="skill-item">📖 ১৫/ Building Code BNBC এর ব্যবহার</div>
-                <div class="skill-item">📄 ১৬/ প্রজেক্ট ডকুমেন্টেশন</div>
-                <div class="skill-item">🏗️ ১৭/ RCC কাজের সুপারভিশন</div>
-                <div class="skill-item">📍 ১৮/ Building Layout ও সেটিং আউট</div>
-                <div class="skill-item">⛓️ ১৯/ Bar Bending Schedule BBS তৈরি</div>
-                <div class="skill-item">💰 ২০/ PWD রেট শিডিউল ব্যবহার</div>
-                <div class="skill-item">♻️ ২১/ Environment ও Waste Management</div>
-                <div class="skill-item">🖥️ ২২/ AutoCAD এ 3D মডেলিং এর বেসিক</div>
-                <div class="skill-item">🤝 ২৩/ কন্ট্রাক্ট ও টেন্ডার ডকুমেন্ট বোঝা</div>
-                <div class="skill-item">🚶 ২৪/ Field Visit ও সাইট মবিলাইজেশন</div>
-                <div class="skill-item">🪵 ২৫/ Formwork ও Scaffolding চেক</div>
-                <div class="skill-item">🧱 ২৬/ Brick Test ও Field Test করা</div>
-                <div class="skill-item">🕳️ ২৭/ Drainage ও Sewerage Line এর কাজ</div>
-                <div class="skill-item">🧱 ২৮/ Retaining Wall ও Boundary Wall</div>
-                <div class="skill-item">🔧 ২৯/ Repair ও Maintenance কাজ</div>
-                <div class="skill-item">📦 ৩০/ Site Inventory ও Store Management</div>
-                <div class="skill-item">💸 ৩১/ Labour Rate ও Material Rate হিসাব</div>
-                <div class="skill-item">🗺️ ৩২/ As Built Drawing বোঝা</div>
-                <div class="skill-item">🔬 ৩৩/ Sub-soil Investigation এর বেসিক</div>
-                <div class="skill-item">📏 ৩৪/ Pile Layout ও Pile Cap চেক</div>
-                <div class="skill-item">☔ ৩৫/ Waterproofing ও Damp Proofing</div>
-                <div class="skill-item">🥣 ৩৬/ Plaster Ratio ও Mortar Mix বোঝা</div>
-                <div class="skill-item">🖌️ ৩৭/ Building Finishing আইটেম সুপারভিশন</div>
-                <div class="skill-item">🛑 ৩৮/ Road Marking ও Signboard সেটআপ</div>
-                <div class="skill-item">🌉 ৩৯/ Culvert ও Bridge এর ছোটখাটো কাজ</div>
-                <div class="skill-item">📑 ৪০/ Govt. Schedule of Rates ও CPWD</div>
-                <div class="skill-item">📋 ৪১/ Measurement Sheet তৈরি</div>
-                <div class="skill-item">✍️ ৪২/ Daily Progress Report লেখা</div>
-                <div class="skill-item">🌐 ৪৩/ ওয়েবসাইট তৈরি করা</div>
-                <div class="skill-item">🚗 ৪৪/ যেকোনো ধরনের গাড়ির ড্রাইভিং করা</div>        </div>
+            <div class="skill-item">📐 ১/ ড্রয়িং ও ডিজাইন</div>
+            <div class="skill-item">🔭 ২/ সার্ভে ও লেভেলিং</div>
+            <div class="skill-item">🧮 ৩/ এস্টিমেটিং ও কস্টিং</div>
+            <div class="skill-item">👷 ৪/ কনস্ট্রাকশন সুপারভিশন</div>
+            <div class="skill-item">🧱 ৫/ ম্যাটেরিয়াল টেস্টিং</div>
+            <div class="skill-item">🏢 ৬/ স্ট্রাকচারাল কনসেপ্ট</div>
+            <div class="skill-item">📁 ७/ অফিসিয়াল কাজ</div>
+            <div class="skill-item">💻 ৮/ সফটওয়্যার স্কিল</div>
+            <div class="skill-item">🚰 ৯/ প্লাম্বিং ও স্যানিটারি কাজ</div>
+            <div class="skill-item">🛣️ ১০/ রোড ও হাইওয়ে কনস্ট্রাকশন</div>
+            <div class="skill-item">💧 ১১/ ওয়াটার সাপ্লাই ও স্যানিটেশন</div>
+            <div class="skill-item">📊 ১২/ কোয়ান্টিটি সার্ভেয়িং</div>
+            <div class="skill-item">🦺 ১৩/ সেফটি ম্যানেজমেন্ট</div>
+            <div class="skill-item">🌱 ১৪/ Soil Test ও Foundation এর বেসিক</div>
+            <div class="skill-item">📖 ১৫/ Building Code BNBC এর ব্যবহার</div>
+            <div class="skill-item">📄 ১৬/ প্রজেক্ট ডকুমেন্টেশন</div>
+            <div class="skill-item">🏗️ ১৭/ RCC কাজের সুপারভিশন</div>
+            <div class="skill-item">📍 ১৮/ Building Layout ও সেটিং আউট</div>
+            <div class="skill-item">⛓️ ১৯/ Bar Bending Schedule BBS তৈরি</div>
+            <div class="skill-item">💰 ২০/ PWD রেট শিডিউল ব্যবহার</div>
+            <div class="skill-item">♻️ ২১/ Environment ও Waste Management</div>
+            <div class="skill-item">🖥️ ২২/ AutoCAD এ 3D মডেলিং এর বেসিক</div>
+            <div class="skill-item">🤝 ২৩/ কন্ট্রাক্ট ও টেন্ডার ডকুমেন্ট বোঝা</div>
+            <div class="skill-item">🚶 ২৪/ Field Visit ও সাইট মবিলাইজেশন</div>
+            <div class="skill-item">🪵 ২৫/ Formwork ও Scaffolding চেক</div>
+            <div class="skill-item">🧱 ২৬/ Brick Test ও Field Test করা</div>
+            <div class="skill-item">🦺 ২৭/ Drainage ও Sewerage Line এর কাজ</div>
+            <div class="skill-item">🧱 ২৮/ Retaining Wall ও Boundary Wall</div>
+            <div class="skill-item">🔧 ২৯/ Repair ও Maintenance কাজ</div>
+            <div class="skill-item">📦 ৩০/ Site Inventory ও Store Management</div>
+            <div class="skill-item">💸 ৩১/ Labour Rate ও Material Rate হিসাব</div>
+            <div class="skill-item">🗺️ ৩২/ As Built Drawing বোঝা</div>
+            <div class="skill-item">🔬 ৩৩/ Sub-soil Investigation এর বেসিক</div>
+            <div class="skill-item">📏 ৩৪/ Pile Layout ও Pile Cap চেক</div>
+            <div class="skill-item">☔ ৩৫/ Waterproofing ও Damp Proofing</div>
+            <div class="skill-item">🥣 ৩৬/ Plaster Ratio ও Mortar Mix বোঝা</div>
+            <div class="skill-item">🖌️ ৩৭/ Building Finishing আইটেম সুপারভিশন</div>
+            <div class="skill-item">🛑 ৩৮/ Road Marking ও Signboard সেটআপ</div>
+            <div class="skill-item">🌉 ৩৯/ Culvert ও Bridge এর ছোটখাটো কাজ</div>
+            <div class="skill-item">📑 ৪০/ Govt. Schedule of Rates ও CPWD</div>
+            <div class="skill-item">📋 ৪১/ Measurement Sheet তৈরি</div>
+            <div class="skill-item">✍️ ৪২/ Daily Progress Report লেখা</div>
+            <div class="skill-item">🌐 ৪৩/ ওয়েবসাইট তৈরি করা</div>
+            <div class="skill-item">🚗 ৪৪/ যেকোনো ধরনের গাড়ির ড্রাইভিং করা</div>
+        </div>
     </div>
 
-    <!-- Panel 4: কর্ম জীবন -->
     <div class="page-panel" id="panel-4">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>কর্ম জীবন</h2>
-        <h2 style="color: #2980b9; text-align: center; font-size: 1.8rem;">সরকারি সিভিল ইঞ্জিনিয়ার ( ১০ গ্রেড ) প্রার্থী</h2>
+        <h2 style="color: #2980b9; text-align: center; font-size: 1.8rem;">সরকারি সিভিল ইঞ্জিনিয়ার (১০ গ্রেড) প্রার্থী</h2>
     </div>
 
-    <!-- Panel 5: স্বজন (Chart Style) -->
     <div class="page-panel" id="panel-5">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>স্বজন (পারিবারিক চার্ট)</h2>
         
         <div class="family-chart">
-            <div class="family-box">মায়ের দিক (নানা বাড়ি)</div>
+            <div class="family-box">মায়ের দিক (নানা বাড়ি)</div>
             <p style="text-align:center;"><strong>নানা:</strong> কোরবান আলি | <strong>নানী:</strong> রাবেয়া খাতুন</p>
             <div class="family-nodes">
-                <div class="node">মা: খুরশিদা বেগম (বড়)</div>
+                <div class="node">মা: খুরশিদা বেগম (বড়)</div>
                 <div class="node">খালা: বেবি আক্তার</div>
                 <div class="node">খালা: পারবিনা</div>
                 <div class="node">মামা: নুরুল আমিন হেলালি</div>
@@ -237,7 +287,7 @@
         </div>
 
         <div class="family-chart">
-            <div class="family-box">বাবার দিক (দাদা বাড়ি)</div>
+            <div class="family-box">বাবার দিক (দাদা বাড়ি)</div>
             <p style="text-align:center;"><strong>দাদা:</strong> আব্দু শুক্কুর | <strong>দাদী:</strong> ছারা খাতুন</p>
             <div class="family-nodes">
                 <div class="node">বাবা: মোহাম্মদ জালাল</div>
@@ -252,63 +302,149 @@
         </div>
     </div>
 
-    <!-- Panel 6: মনের কথা -->
     <div class="page-panel" id="panel-6">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
-        <h2>শাহীন মুস্তাফার মনের কথা</h2>
-        <p>মনের ভিতর অনেক কথা সব বলবে।)</p>
-    </div>
+        <h2>শাহিন মোস্তফার মনের কথা</h2>
+        <p>আমি শাহিন মোস্তফা। সাধারণ একটি পরিবার থেকে উঠে আসা একজন মানুষ। আমার পরিচয় শুধু একজন সিভিল ইঞ্জিনিয়ারিং শিক্ষার্থী নয়; আমি একজন ছেলে, একজন ভাই, একজন স্বপ্নবাজ মানুষ, যে বিশ্বাস করে কঠোর পরিশ্রম একদিন না একদিন তার সঠিক মূল্য অবশ্যই পায়।</p>
+        
+        <p>আমার জীবনের সবচেয়ে বড় সম্পদ টাকা নয়, পরিচিতি নয়, বরং আমার পরিবার। তারা অনেক কষ্ট করে, অনেক ত্যাগ স্বীকার করে আমাকে আজকের অবস্থানে নিয়ে এসেছে। এমন দিনও গেছে যখন পরিবারের মানুষগুলো নিজেদের প্রয়োজনকে পাশে সরিয়ে রেখে আমার পড়াশোনার খরচ জোগাড় করেছে। তাদের এই ত্যাগের কথা মনে হলেই আমি নিজের দায়িত্ব আরও গভীরভাবে অনুভব করি। আমি জানি, আমার সফলতা শুধু আমার ব্যক্তিগত অর্জন হবে না; এটি হবে আমার পরিবারের বছরের পর বছর পরিশ্রম, আশা এবং দোয়ার ফল।</p>
+        
+        <p>আমি ছোটবেলা থেকেই লক্ষ্য করেছি, পৃথিবী সবসময় ন্যায়সঙ্গত নয়। ভালো মানুষ সব সময় ভালো ব্যবহার পায় না, আর পরিশ্রমী মানুষ সব সময় সঙ্গে সঙ্গে ফল পায় না। তবুও আমি বিশ্বাস করি, মানুষের আসল শক্তি হলো সে কঠিন সময়ে কেমন আচরণ করে। প্রতিকূলতার মধ্যেও নিজের নীতি ধরে রাখতে পারাটাই বড় বিষয়।</p>
+        
+        <p>মানুষকে আমি অন্ধভাবে বিশ্বাস করি না, আবার অকারণে অবিশ্বাসও করি না। আমি সম্পর্ককে গুরুত্ব দিই, কিন্তু সেই সম্পর্কের ভিত্তি হতে হবে সম্মান, সততা এবং পারস্পরিক মূল্যবোধ। আমার জীবনে যারা এসেছে, তাদের সবাইকে আমি এক চোখে দেখি না। সময়, আচরণ এবং চরিত্রের ভিত্তিতে আমি মানুষকে মূল্যায়ন করি। কারণ আমি বিশ্বাস করি, মানুষের কথার চেয়ে তার কাজ অনেক বেশি সত্য কথা বলে।</p>
+        
+        <p>আমার কাছে সম্মান একটি অত্যন্ত মূল্যবান বিষয়। কেউ আমাকে ধনী বলে সম্মান করুক, শিক্ষিত বলে সম্মান করুক বা ক্ষমতাবান বলে সম্মান করুক—এসবের চেয়ে আমি চাই মানুষ আমাকে একজন সৎ, দায়িত্বশীল এবং নির্ভরযোগ্য মানুষ হিসেবে জানুক। কারণ পদবী একদিন হারিয়ে যেতে পারে, অর্থ একদিন কমে যেতে পারে, কিন্তু চরিত্র মানুষের সবচেয়ে বড় পরিচয়।</p>
+        
+        <p>আমি নিজের দুর্বলতাগুলোও স্বীকার করি। আমি সবসময় নিখুঁত নই। অনেক সময় অলসতা আসে, অনেক সময় পরিকল্পনা অনুযায়ী চলতে পারি না, অনেক সময় আবেগ আমাকে প্রভাবিত করে। কিন্তু আমি চেষ্টা করি প্রতিদিন অন্তত গতকালের নিজের চেয়ে একটু ভালো হতে। আমার কাছে উন্নতি মানে অন্য কাউকে হারানো নয়; বরং নিজের সীমাবদ্ধতাগুলোকে ধীরে ধীরে অতিক্রম করা।</p>
+        
+        <p>আমি জ্ঞানকে খুব মূল্য দিই। কোনো বিষয় না জেনে মতামত দেওয়ার চেয়ে আমি আগে শিখতে চাই। আমি বিশ্বাস করি, একজন প্রকৌশলীর সবচেয়ে বড় শক্তি শুধু ডিগ্রি নয়, বরং সমস্যা সমাধানের ক্ষমতা। তাই আমি প্রতিনিয়ত নতুন কিছু শেখার চেষ্টা করি। বই, অভিজ্ঞতা, ভুল, ব্যর্থতা—সবকিছুকেই আমি শিক্ষক হিসেবে দেখি।</p>
+        
+        <p>আমার জীবনের একটি বড় লক্ষ্য হলো একজন দক্ষ ও সৎ প্রকৌশলী হওয়া। আমি এমন কাজ করতে চাই, যা শুধু আমার নিজের জন্য নয়, সমাজের জন্যও উপকারী হবে। আমি চাই, ভবিষ্যতে যখন কেউ আমার নাম শুনবে, তখন সে শুধু একজন ইঞ্জিনিয়ারকে নয়, একজন দায়িত্বশীল মানুষকেও মনে করবে।</p>
+        
+        <p>আমি বিশ্বাস করি, মানুষের জীবনে আত্মসম্মান খুব গুরুত্বপূর্ণ। কারও ভালোবাসা, বন্ধুত্ব বা সম্পর্ক পাওয়ার জন্য নিজের সম্মান বিসর্জন দেওয়া উচিত নয়। যে সম্পর্ক সম্মান দেয় না, মূল্য দেয় না, সেখানে দূরত্ব বজায় রাখা অনেক সময় প্রয়োজন হয়ে যায়। কারণ নিজের মর্যাদা রক্ষা করা দুর্বলতার নয়, বরং পরিণত মানসিকতার পরিচয়।</p>
+        
+        <p>জীবনে আমি অনেক কিছু শিখেছি, কিন্তু একটি বিষয় সবচেয়ে বেশি উপলব্ধি করেছি—সময় কারও জন্য অপেক্ষা করে না। তাই আমি চেষ্টা করি সময়কে মূল্য দিতে, কারণ হারিয়ে যাওয়া সময় পৃথিবীর কোনো সম্পদ দিয়েই ফিরিয়ে আনা যায় না।</p>
+        
+        <p>আমার স্বপ্ন খুব বড়, কিন্তু আমি জানি বড় স্বপ্ন পূরণ করতে হলে ছোট ছোট পদক্ষেপ নিয়মিতভাবে নিতে হয়। আমি রাতারাতি সফল হতে চাই না। আমি এমন সফলতা চাই, যার পেছনে থাকবে জ্ঞান, পরিশ্রম, সততা এবং ধৈর্যের শক্ত ভিত্তি।</p>
+        
+        <p>আমি বিশ্বাস করি, মানুষ তার অতীত দ্বারা নয়, তার সিদ্ধান্ত দ্বারা পরিচিত হয়। অতীতে আমি কী ছিলাম, তার চেয়ে গুরুত্বপূর্ণ হলো আমি ভবিষ্যতে কী হতে চাই। তাই আমি প্রতিদিন নতুন করে শুরু করার সাহস রাখি।</p>
+        
+        <p>সবশেষে, আমি নিজেকে কোনো অসাধারণ মানুষ মনে করি না। আমি একজন সাধারণ মানুষ, যার কিছু স্বপ্ন আছে, কিছু দায়িত্ব আছে, কিছু ভুল আছে এবং অনেক আশা আছে। আমি এখনও শিখছি, এখনও পথ চলছি, এখনও নিজেকে গড়ে তুলছি। আর যতদিন বেঁচে থাকব, ততদিন চেষ্টা করে যাব একজন ভালো মানুষ, একজন দক্ষ প্রকৌশলী এবং একজন দায়িত্বশীল সন্তান হওয়ার।</p>
+    </div>>
 
-    <!-- Panel 7: ডেভলপার -->
-    <div class="page-panel" id="panel-7">
+    <div class="page-panel" id="panel-8">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
-        <h2>ওয়েব ডেভলপার</h2>
-        <div style="text-align: center; margin-top: 10px;">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: #ccc; margin: 0 auto; display: flex; align-items: center; justify-content: center;">ডেভলপার ছবি</div>
-        </div>
-        <p><strong>নাম:</strong> শাহিন মোস্তাফা</p>
-        <p><strong>ঠিকানা:</strong> কক্সবাজার, মহেশখালী, কালারমারছড়া</p>
-        <div class="contact-links">
-            <a href="tel:01842330673">📞 01842330673 (Call)</a>
-            <a href="tel:01621741925">📞 01621741925 (Call)</a>
-            <a href="tel:09638987792">📞 09638987792 (Call)</a>
-            <a href="https://wa.me/8801842330673" target="_blank">💬 WhatsApp এ মেসেজ দিন</a>
+        <h2 style="color: #ff3b30;">মেডিকেল ও স্বাস্থ্য তথ্য</h2>
+        
+        <div class="medical-grid">
+            <div class="med-card bmi">
+                <h4>⚖️ শারীরিক গঠন</h4>
+                <p><strong>উচনা:</strong> ৫ ফুট ৫ ইঞ্চি (প্রায় ১৬৫ সেমি)</p>
+                <p><strong>ওজন:</strong> ৭৫ কেজি</p>
+                <p><strong>BMI:</strong> ২৭.৫ <span class="highlight" style="background:#e74c3c; color:#fff; font-size: 0.8rem; padding: 3px 6px;">ওভারওয়েট শ্রেণি</span></p>
+            </div>
+
+            <div class="med-card eyes">
+                <h4>👁️ দৃষ্টিশক্তি</h4>
+                <p><strong>মান:</strong> ৬/৬ (স্বাভাবিক)</p>
+            </div>
+
+            <div class="med-card blood">
+                <h4>🩸 রক্ত পরীক্ষা</h4>
+                <p><strong>গ্রুপ:</strong> A+</p>
+                <p><strong>হিমোগ্লোবিন (Hb):</strong> ১৫.৫ গ্রাম/ডেসিলিটার (স্বাভাবিক)</p>
+                <p><strong>ESR:</strong> ৫ মিমি/১ম ঘণ্টা (স্বাভাবিক)</p>
+                <p><strong>WBC (শ্বেত রক্তকণিকা):</strong> ৬,২৬০/কিউমিমি (স্বাভাবিক)</p>
+                <p><strong>প্লেটলেট:</strong> ২,৯০,০০০/কিউমিমি (স্বাভাবিক)</p>
+            </div>
+
+            <div class="med-card vitals">
+                <h4>🔬 ডিফারেনশিয়াল কাউন্ট</h4>
+                <p><strong>নিউট্রোফিল:</strong> ৫৩%</p>
+                <p><strong>লিম্ফোসাইট:</strong> ৩৪%</p>
+                <p><strong>মনোসাইট:</strong> ৯%</p>
+                <p><strong>ইওসিনোফিল:</strong> ৪%</p>
+                <p><strong>বেসোফিল:</strong> ০%</p>
+                <p style="color: #27ae60; font-size: 0.85rem; font-weight: bold; margin-top: 8px;">*সবগুলো মান স্বাভাবিক সীমার মধ্যে ছিল।</p>
+            </div>
+
+            <div class="med-card pulse">
+                <h4>🫀 ভাইটাল সাইন</h4>
+                <p><strong>অক্সিজেন স্যাচুরেশন (SpO₂):</strong> ৯৯%</p>
+                <p><strong>পালস:</strong> ৯৬ বিট/মিনিট</p>
+            </div>
         </div>
     </div>
 
-    <!-- Draggable Complaint Box -->
+     </div>
+
+    <!-- ১১. ওয়েব ডেভেলপার কন্টেন্ট -->
+    <div id="content-developer" style="display:none;">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <!-- শাহিন ভাই আপনার ছবি এখানে দিবেন -->
+            <img src="9.jpg" alt="Developer Photo" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #008000;">
+        </div>
+        <p style="font-size: 1.2em;"><b>নাম:</b> শাহিন মোস্তাফা</p>
+        <p style="font-size: 1.2em;"><b>ঠিকানা:</b> কক্সবাজার, মহেশখালী, কালারমারছড়া</p>
+        
+        <p style="font-size: 1.1em; margin-top: 15px;"><b>মোবাইল:</b></p>
+        <ul style="list-style-type: none; padding: 0; line-height: 2;">
+            <li class="contact-links">
+                ০১৮৪২৩৩০৬৭৩: 
+                <a href="tel:01842330673" class="btn-call"><i class="fas fa-phone"></i> Call</a> 
+                <a href="https://wa.me/8801842330673" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="imo://01842330673" class="btn-imo">Imo</a>
+            </li>
+            <li class="contact-links">
+                ০১৬২১৭৪১৯২৫: 
+                <a href="tel:01622741925" class="btn-call"><i class="fas fa-phone"></i> Call</a> 
+                <a href="https://wa.me/8801622741925" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="imo://01622741925" class="btn-imo">Imo</a>
+            </li>
+            <li class="contact-links">
+                ০৯৬৩৮৯৮৭৭৯২: 
+                <a href="tel:09638987792" class="btn-call"><i class="fas fa-phone"></i> Call</a> 
+                <a href="https://wa.me/8809638987792" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="imo://09638987792" class="btn-imo">Imo</a>
+            </li>
+        </ul>
+    </div>
+
+
     <div id="complaint-box-widget">
         <div class="complaint-title-btn" id="complaint-toggle-btn">✉️ অভিযোগ বক্স</div>
         <div id="complaint-form">
             <h4 style="margin-top:0;">শাহিন মুস্তাফা কে আপনি কি কি অভিযোগ জানাতে চান তা এখানে লিখুন:</h4>
             <textarea placeholder="এখানে অভিযোগ লিখুন (১০০০ শব্দ)..."></textarea>
             <input type="file" style="margin-bottom: 10px; width: 100%;">
-            <button onclick="alert('অভিযোগ জমা দেওয়া হয়েছে!')">জমা দিন</button>
+            <button onclick="alert('অভিযোগ জমা দেওয়া হয়েছে!')">জমা দিন</button>
             <hr>
             <button class="view-complaints-btn" onclick="viewComplaints()">অভিযোগ দেখুন (Admin)</button>
         </div>
     </div>
 
-    <!-- Social Footer -->
-    <footer class="social-footer">
-        <a href="https://www.facebook.com/profile.php?id=100068679007563" target="_blank">📘 Facebook</a>
-        <a href="https://youtube.com/@shahinmostafa9898" target="_blank">📺 YouTube</a>
-        <a href="https://wa.me/8801842330673" target="_blank">💬 WhatsApp</a>
-        <a href="tel:01842330673">📱 Telegram/Imo</a>
-        <a href="https://www.linkedin.com/in/shahin-sultan-a78bb1257" target="_blank">💼 LinkedIn</a>
+    <footer class="ios-dock-container">
+        <div class="ios-social-grid">
+            <a href="https://www.facebook.com/profile.php?id=100068679007563" target="_blank" class="ios-app-link fb-app" title="Facebook">📘</a>
+            <a href="https://youtube.com/@shahinmostafa9898" target="_blank" class="ios-app-link yt-app" title="YouTube">📺</a>
+            <a href="https://wa.me/8801842330673" target="_blank" class="ios-app-link wa-app" title="WhatsApp">💬</a>
+            <a href="tel:01842330673" class="ios-app-link tg-app" title="Telegram/Imo">📱</a>
+            <a href="https://www.linkedin.com/in/shahin-sultan-a78bb1257" target="_blank" class="ios-app-link li-app" title="LinkedIn">💼</a>
+        </div>
         <div class="last-update" id="update-date">সর্বশেষ আপডেট: </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // 1. Welcome Screen
+        // 1. Splash Welcome Screen Timer
         setTimeout(() => {
             const welcome = document.getElementById('welcome-screen');
             welcome.style.opacity = '0';
-            setTimeout(() => { welcome.style.display = 'none'; }, 500);
-        }, 2000);
+            setTimeout(() => { 
+                welcome.style.visibility = 'hidden'; 
+            }, 800);
+        }, 2200);
 
-        // 2. Open / Close Panels (Pages Mode)
+        // 2. Open / Close Panels Switching
         const mainMenu = document.getElementById('main-menu');
         const sliderSection = document.getElementById('slider-container');
         const panels = document.querySelectorAll('.page-panel');
@@ -323,12 +459,12 @@
 
         function closePanel() {
             panels.forEach(p => p.style.display = 'none');
-            mainMenu.style.display = 'flex';
+            mainMenu.style.display = 'grid';
             sliderSection.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
-        // 3. Slider Pause and Zoom logic
+        // 3. Image Slider Core Logic (Responsive)
         const slider = document.getElementById('slider');
         const sliderContainer = document.getElementById('slider-container');
         let slideIndex = 0;
@@ -342,16 +478,14 @@
                     if (slideIndex >= 10) slideIndex = 0;
                     slider.style.transform = `translateX(-${slideIndex * 100}%)`;
                 }
-            }, 1000);
+            }, 1200);
         }
         startSlider();
 
-        // Pause on press (mouse or touch) and zoom
         function pauseAndZoom() {
             isPaused = true;
             sliderContainer.classList.add('zoomed');
         }
-        // Resume on release
         function resumeSlider() {
             isPaused = false;
             sliderContainer.classList.remove('zoomed');
@@ -360,11 +494,10 @@
         sliderContainer.addEventListener('mousedown', pauseAndZoom);
         sliderContainer.addEventListener('mouseup', resumeSlider);
         sliderContainer.addEventListener('mouseleave', resumeSlider);
-        
         sliderContainer.addEventListener('touchstart', pauseAndZoom);
         sliderContainer.addEventListener('touchend', resumeSlider);
 
-        // 4. Complaint Box Toggle & Draggable
+        // 4. Complaint Box Toggle
         const complaintToggle = document.getElementById('complaint-toggle-btn');
         const complaintForm = document.getElementById('complaint-form');
         const widget = document.getElementById('complaint-box-widget');
@@ -373,17 +506,17 @@
             complaintForm.style.display = complaintForm.style.display === 'block' ? 'none' : 'block';
         });
 
-        // 5. Admin View Complaints (Simulated Password)
+        // 5. Admin Panel Security
         function viewComplaints() {
-            let pass = prompt("পাসওয়ার্ড দিন:");
+            let pass = prompt("পাসওয়ার্ড দিন:");
             if(pass === "sultan@#3876") {
                 alert("স্বাগতম শাহিন মোস্তাফা! আপনার অভিযোগের তালিকা লোড হচ্ছে...");
             } else {
-                alert("ভুল পাসওয়ার্ড!");
+                alert("ভুল পাসওয়ার্ড!");
             }
         }
 
-        // Dragging Logic
+        // Draggable Widget Algorithm
         let isDragging = false; let currentX; let currentY; let initialX; let initialY; let xOffset = 0; let yOffset = 0;
         complaintToggle.addEventListener("mousedown", dragStart);
         document.addEventListener("mouseup", dragEnd);
@@ -409,7 +542,7 @@
         }
         function setTranslate(xPos, yPos, el) { el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)"; }
 
-        // Last Updated Date
+        // Dynamic Last Modified Date
         document.getElementById('update-date').innerText += " " + new Date(document.lastModified).toLocaleDateString('bn-BD');
     </script>
 </body>
