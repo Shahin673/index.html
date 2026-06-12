@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>শাহিন মোস্তাফা - ব্যক্তিগত ওয়েবসাইট</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* General Styles */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; overflow-x: hidden; }
@@ -59,21 +60,45 @@
         .slider-track img { min-width: 100%; height: 100%; object-fit: contain; background: #111; transition: transform 0.3s ease; }
         .slider-container.zoomed .slider-track img { transform: scale(1.4); cursor: zoom-in; }
         
-        /* Standard Panel Menu Grid (Restored with Text Labels) */
+        /* Standard Panel Menu Grid */
         .main-menu-grid { 
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; 
             max-width: 500px; margin: 30px auto; padding: 0 15px; 
         }
         .menu-btn { 
-            background: white; border: 2px solid #34495e; color: #2c3e50; 
+            border: 2px solid #34495e; color: #2c3e50; 
             padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 10px; 
             cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .menu-btn:hover { background: #34495e; color: white; transform: translateY(-2px); }
         .menu-btn:active { transform: translateY(0); }
 
-        /* iPhone/iOS-style Social Media App Grid/Dock (No text, only icons) */
+        /* প্রতিটি বাটনের জন্য আলাদা রং */
+        .main-menu-grid .menu-btn:nth-child(1) { background: #e3f2fd; border-color: #2196f3; color: #0d47a1; }
+        .main-menu-grid .menu-btn:nth-child(1):hover { background: #2196f3; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(2) { background: #f3e5f5; border-color: #9c27b0; color: #4a148c; }
+        .main-menu-grid .menu-btn:nth-child(2):hover { background: #9c27b0; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(3) { background: #fff8e1; border-color: #ffc107; color: #ff6f00; }
+        .main-menu-grid .menu-btn:nth-child(3):hover { background: #ffc107; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(4) { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+        .main-menu-grid .menu-btn:nth-child(4):hover { background: #4caf50; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(5) { background: #ffebee; border-color: #f44336; color: #b71c1c; }
+        .main-menu-grid .menu-btn:nth-child(5):hover { background: #f44336; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(6) { background: #fce4ec; border-color: #e91e63; color: #880e4f; }
+        .main-menu-grid .menu-btn:nth-child(6):hover { background: #e91e63; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(7) { background: #e0f7fa; border-color: #00bcd4; color: #006064; }
+        .main-menu-grid .menu-btn:nth-child(7):hover { background: #00bcd4; color: white; transform: translateY(-2px); }
+
+        .main-menu-grid .menu-btn:nth-child(8) { background: #efebe9; border-color: #795548; color: #3e2723; }
+        .main-menu-grid .menu-btn:nth-child(8):hover { background: #795548; color: white; transform: translateY(-2px); }
+
+        /* iPhone/iOS-style Social Media App Grid/Dock */
         .ios-dock-container {
             background: #2c3e50; padding: 30px 15px; text-align: center; margin-top: 40px;
         }
@@ -86,9 +111,10 @@
         }
         .ios-app-link { 
             width: 62px; height: 62px; border-radius: 15px; display: flex; 
-            justify-content: center; align-items: center; font-size: 1.9rem; 
+            justify-content: center; align-items: center; font-size: 2rem; 
             text-decoration: none; box-shadow: 0 6px 12px rgba(0,0,0,0.25); 
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: white;
         }
         .ios-app-link:active { transform: scale(0.88); box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
         @media (max-width: 360px) { .ios-app-link { width: 54px; height: 54px; font-size: 1.6rem; border-radius: 12px; } }
@@ -132,6 +158,7 @@
         .med-card.blood { border-left-color: #E74C3C; background-color: #FDEDEC; }
         .med-card.vitals { border-left-color: #27AE60; background-color: #EAFAF1; }
         .med-card.pulse { border-left-color: #8E44AD; background-color: #F4ECF7; }
+
         /* Complaint Box */
         #complaint-box-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
         .complaint-title-btn { background: #c0392b; color: white; padding: 10px 15px; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); white-space: nowrap; }
@@ -142,38 +169,28 @@
 
         .contact-links a { display: block; margin: 10px 0; color: #2980b9; text-decoration: none; font-weight: bold; background: #ecf0f1; padding: 10px; border-radius: 5px; text-align: center; }
         .last-update { text-align: center; font-size: 0.8rem; color: #cbd5e1; margin-top: 20px; }
-        /* সোশ্যাল মিডিয়া আইকনের জন্য */
-.social-icons a {
-    font-size: 30px;
-    margin: 0 10px;
-    text-decoration: none;
-    transition: transform 0.3s;
-}
-.fa-facebook { color: #1877F2; }
-.fa-youtube { color: #FF0000; }
-.fa-linkedin { color: #0A66C2; }
-.fa-github { color: #333; }
+        
         .lang-container { text-align: right; margin-bottom: 20px; position: relative; }
-.lang-btn { background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-.dropdown-content { display: none; position: absolute; right: 0; background-color: #fff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1000; border-radius: 5px; }
-.dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; }
-.dropdown-content a:hover { background-color: #f1f1f1; }
-.show { display: block; }
-#google_translate_element { display: none; }
+        .lang-btn { background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: #fff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1000; border-radius: 5px; }
+        .dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; }
+        .dropdown-content a:hover { background-color: #f1f1f1; }
+        .show { display: block; }
+        #google_translate_element { display: none; }
     </style>
 </head>
 <body>
     <div id="google_translate_element"></div>
-<div class="lang-container">
-    <button onclick="toggleDropdown()" class="lang-btn">ভাষা পরিবর্তন</button>
-    <div id="langMenu" class="dropdown-content">
-        <a href="#" onclick="changeLanguage('bn')">বাংলা</a>
-        <a href="#" onclick="changeLanguage('en')">English</a>
-        <a href="#" onclick="changeLanguage('ar')">العربية</a>
-        <a href="#" onclick="changeLanguage('es')">Español</a>
-        <a href="#" onclick="changeLanguage('hi')">हिन्दी</a>
+    <div class="lang-container">
+        <button onclick="toggleDropdown()" class="lang-btn">ভাষা পরিবর্তন</button>
+        <div id="langMenu" class="dropdown-content">
+            <a href="#" onclick="changeLanguage('bn')">বাংলা</a>
+            <a href="#" onclick="changeLanguage('en')">English</a>
+            <a href="#" onclick="changeLanguage('ar')">العربية</a>
+            <a href="#" onclick="changeLanguage('es')">Español</a>
+            <a href="#" onclick="changeLanguage('hi')">हिन्दी</a>
+        </div>
     </div>
-</div>
 
     <div id="welcome-screen">
         <h1>শাহিন মোস্তাফার ওয়েবসাইটে স্বাগতম</h1>
@@ -184,7 +201,7 @@
     </header>
 
     <div class="notice-bar">
-        <marquee behavior="scroll" direction="left">✨ ৩০/০৬/২০২৬ পরযন্ত কল ছাড়া সব ধরনের যোগাযোগ বন্ধ থাকবে । তবে আপাদত জেনে রাখুন শাহিন মানে নির্বাচিত বাজপাখি আর মোস্তাফা মানে আপনি জানেন   ✨</marquee>
+        <marquee behavior="scroll" direction="left">আমি শাহিন মোস্তাফা ।  প্রয়োজনে নিরাপত্তা নিশ্চত করতে ও গোপনিয়তা রক্ষা করতে একাধিক নকর পরিচয় ব্যাবহার করা হয় । আমার আসলতা যাচাই করতে কর করে নিশ্চিত করবেন ।  </marquee>
     </div>
 
     <div class="slider-container" id="slider-container">
@@ -237,7 +254,7 @@
         <h2>শিক্ষা জীবন</h2>
         <p>প্রাক-প্রাথমিক পড়ালেখা করেন তার মায়ের কাছ থেকে এবং তার পর <span class="highlight">মিজ্জিরপাড়া সরকারি প্রাথমিক বিদ্যালয়ে</span> ভর্তি হয়। সেখান থেকে এক ধাপে প্রাথমিক লেখাপড়া শেষ করে।</p>
         <p>পরে <span class="highlight">কালারমারছড়া উচ্চ বিদ্যালয়ে</span> বিজ্ঞান বিভাগ নিয়ে মাধ্যমিক শেষ করে।</p>
-        <p>এরপর ভর্তি হয় বাংলাদেশ কারিগরি শিক্ষা বোর্ড এর আওতাভুক্ত <span class="highlight">পলিটেকনিক ইনস্টিটিউট</span> এ সিভিল ইঞ্জিনিয়ার নিয়ে। সেখানে ভালো ফলাফল এমন কী সর্বোচ্চ সিজিপিএ ৩.৮১ আসে।</p>
+        <p>এরপর ভর্তি হয় বাংলাদেশ কারিগরি শিক্ষা বোর্ড এর আওতাভুক্ত <span class="highlight">পলিটেকনিক ইনস্টিটিউট</span> এ সিভিল ইঞ্জিনিয়ার নিয়ে। সেখানে ভালো ফলাফল এমন কী সর্বোচ্চ জিপিএ ৩.৭৯ আসে।</p>
         <p>প্রাইমারিতে তার পছন্দের স্যার ছিল ম্যাডাম চাবুক্কুর নাহার ও এসএম সিরাজুল হক।</p>
         <p>জীবনের প্রথম শিক্ষক আমার মা।</p>
     </div>
@@ -334,31 +351,19 @@
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>শাহিন মোস্তফার মনের কথা</h2>
         <p>আমি শাহিন মোস্তফা। সাধারণ একটি পরিবার থেকে উঠে আসা একজন মানুষ। আমার পরিচয় শুধু একজন সিভিল ইঞ্জিনিয়ারিং শিক্ষার্থী নয়; আমি একজন ছেলে, একজন ভাই, একজন স্বপ্নবাজ মানুষ, যে বিশ্বাস করে কঠোর পরিশ্রম একদিন না একদিন তার সঠিক মূল্য অবশ্যই পায়।</p>
-        
         <p>আমার জীবনের সবচেয়ে বড় সম্পদ টাকা নয়, পরিচিতি নয়, বরং আমার পরিবার। তারা অনেক কষ্ট করে, অনেক ত্যাগ স্বীকার করে আমাকে আজকের অবস্থানে নিয়ে এসেছে। এমন দিনও গেছে যখন পরিবারের মানুষগুলো নিজেদের প্রয়োজনকে পাশে সরিয়ে রেখে আমার পড়াশোনার খরচ জোগাড় করেছে। তাদের এই ত্যাগের কথা মনে হলেই আমি নিজের দায়িত্ব আরও গভীরভাবে অনুভব করি। আমি জানি, আমার সফলতা শুধু আমার ব্যক্তিগত অর্জন হবে না; এটি হবে আমার পরিবারের বছরের পর বছর পরিশ্রম, আশা এবং দোয়ার ফল।</p>
-        
-        <p>আমি ছোটবেলা থেকেই লক্ষ্য করেছি, পৃথিবী সবসময় ন্যায়সঙ্গত নয়। ভালো মানুষ সব সময় ভালো ব্যবহার পায় না, আর পরিশ্রমী মানুষ সব সময় সঙ্গে সঙ্গে ফল পায় না। তবুও আমি বিশ্বাস করি, মানুষের আসল শক্তি হলো সে কঠিন সময়ে কেমন আচরণ করে। প্রতিকূলতার মধ্যেও নিজের নীতি ধরে রাখতে পারাটাই বড় বিষয়।</p>
-        
+        <p>আমি ছোটবেলা থেকেই লক্ষ্য করেছি, পৃথিবী সবসময় ন্যায়সঙ্গত নয়। ভালো মানুষ সব সময় ভালো ব্যবহার পায় না, আর পরিশ্রমী মানুষ সব সময় সঙ্গে সঙ্গে ফল পায় ঘন। তবুও আমি বিশ্বাস করি, মানুষের আসল শক্তি হলো সে কঠিন সময়ে কেমন আচরণ করে। প্রতিকূলতার মধ্যেও নিজের নীতি ধরে রাখতে পারাটাই বড় বিষয়।</p>
         <p>মানুষকে আমি অন্ধভাবে বিশ্বাস করি না, আবার অকারণে অবিশ্বাসও করি না। আমি সম্পর্ককে গুরুত্ব দিই, কিন্তু সেই সম্পর্কের ভিত্তি হতে হবে সম্মান, সততা এবং পারস্পরিক মূল্যবোধ। আমার জীবনে যারা এসেছে, তাদের সবাইকে আমি এক চোখে দেখি না। সময়, আচরণ এবং চরিত্রের ভিত্তিতে আমি মানুষকে মূল্যায়ন করি। কারণ আমি বিশ্বাস করি, মানুষের কথার চেয়ে তার কাজ অনেক বেশি সত্য কথা বলে।</p>
-        
         <p>আমার কাছে সম্মান একটি অত্যন্ত মূল্যবান বিষয়। কেউ আমাকে ধনী বলে সম্মান করুক, শিক্ষিত বলে সম্মান করুক বা ক্ষমতাবান বলে সম্মান করুক—এসবের চেয়ে আমি চাই মানুষ আমাকে একজন সৎ, দায়িত্বশীল এবং নির্ভরযোগ্য মানুষ হিসেবে জানুক। কারণ পদবী একদিন হারিয়ে যেতে পারে, অর্থ একদিন কমে যেতে পারে, কিন্তু চরিত্র মানুষের সবচেয়ে বড় পরিচয়।</p>
-        
         <p>আমি নিজের দুর্বলতাগুলোও স্বীকার করি। আমি সবসময় নিখুঁত নই। অনেক সময় অলসতা আসে, অনেক সময় পরিকল্পনা অনুযায়ী চলতে পারি না, অনেক সময় আবেগ আমাকে প্রভাবিত করে। কিন্তু আমি চেষ্টা করি প্রতিদিন অন্তত গতকালের নিজের চেয়ে একটু ভালো হতে। আমার কাছে উন্নতি মানে অন্য কাউকে হারানো নয়; বরং নিজের সীমাবদ্ধতাগুলোকে ধীরে ধীরে অতিক্রম করা।</p>
-        
         <p>আমি জ্ঞানকে খুব মূল্য দিই। কোনো বিষয় না জেনে মতামত দেওয়ার চেয়ে আমি আগে শিখতে চাই। আমি বিশ্বাস করি, একজন প্রকৌশলীর সবচেয়ে বড় শক্তি শুধু ডিগ্রি নয়, বরং সমস্যা সমাধানের ক্ষমতা। তাই আমি প্রতিনিয়ত নতুন কিছু শেখার চেষ্টা করি। বই, অভিজ্ঞতা, ভুল, ব্যর্থতা—সবকিছুকেই আমি শিক্ষক হিসেবে দেখি।</p>
-        
         <p>আমার জীবনের একটি বড় লক্ষ্য হলো একজন দক্ষ ও সৎ প্রকৌশলী হওয়া। আমি এমন কাজ করতে চাই, যা শুধু আমার নিজের জন্য নয়, সমাজের জন্যও উপকারী হবে। আমি চাই, ভবিষ্যতে যখন কেউ আমার নাম শুনবে, তখন সে শুধু একজন ইঞ্জিনিয়ারকে নয়, একজন দায়িত্বশীল মানুষকেও মনে করবে।</p>
-        
         <p>আমি বিশ্বাস করি, মানুষের জীবনে আত্মসম্মান খুব গুরুত্বপূর্ণ। কারও ভালোবাসা, বন্ধুত্ব বা সম্পর্ক পাওয়ার জন্য নিজের সম্মান বিসর্জন দেওয়া উচিত নয়। যে সম্পর্ক সম্মান দেয় না, মূল্য দেয় না, সেখানে দূরত্ব বজায় রাখা অনেক সময় প্রয়োজন হয়ে যায়। কারণ নিজের মর্যাদা রক্ষা করা দুর্বলতার নয়, বরং পরিণত মানসিকতার পরিচয়।</p>
-        
         <p>জীবনে আমি অনেক কিছু শিখেছি, কিন্তু একটি বিষয় সবচেয়ে বেশি উপলব্ধি করেছি—সময় কারও জন্য অপেক্ষা করে না। তাই আমি চেষ্টা করি সময়কে মূল্য দিতে, কারণ হারিয়ে যাওয়া সময় পৃথিবীর কোনো সম্পদ দিয়েই ফিরিয়ে আনা যায় না।</p>
-        
         <p>আমার স্বপ্ন খুব বড়, কিন্তু আমি জানি বড় স্বপ্ন পূরণ করতে হলে ছোট ছোট পদক্ষেপ নিয়মিতভাবে নিতে হয়। আমি রাতারাতি সফল হতে চাই না। আমি এমন সফলতা চাই, যার পেছনে থাকবে জ্ঞান, পরিশ্রম, সততা এবং ধৈর্যের শক্ত ভিত্তি।</p>
-        
         <p>আমি বিশ্বাস করি, মানুষ তার অতীত দ্বারা নয়, তার সিদ্ধান্ত দ্বারা পরিচিত হয়। অতীতে আমি কী ছিলাম, তার চেয়ে গুরুত্বপূর্ণ হলো আমি ভবিষ্যতে কী হতে চাই। তাই আমি প্রতিদিন নতুন করে শুরু করার সাহস রাখি।</p>
-        
         <p>সবশেষে, আমি নিজেকে কোনো অসাধারণ মানুষ মনে করি না। আমি একজন সাধারণ মানুষ, যার কিছু স্বপ্ন আছে, কিছু দায়িত্ব আছে, কিছু ভুল আছে এবং অনেক আশা আছে। আমি এখনও শিখছি, এখনও পথ চলছি, এখনও নিজেকে গড়ে তুলছি। আর যতদিন বেঁচে থাকব, ততদিন চেষ্টা করে যাব একজন ভালো মানুষ, একজন দক্ষ প্রকৌশলী এবং একজন দায়িত্বশীল সন্তান হওয়ার।</p>
-    </div>>
+    </div>
 
     <div class="page-panel" id="panel-8">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
@@ -367,7 +372,7 @@
         <div class="medical-grid">
             <div class="med-card bmi">
                 <h4>⚖️ শারীরিক গঠন</h4>
-                <p><strong>উচনা:</strong> ৫ ফুট ৫ ইঞ্চি (প্রায় ১৬৫ সেমি)</p>
+                <p><strong>উচ্চতা:</strong> ৫ ফুট ৫ ইঞ্চি (প্রায় ১৬৫ সেমি)</p>
                 <p><strong>ওজন:</strong> ৭৫ কেজি</p>
                 <p><strong>BMI:</strong> ২৭.৫ <span class="highlight" style="background:#e74c3c; color:#fff; font-size: 0.8rem; padding: 3px 6px;">সুলতান সেরা</span></p>
             </div>
@@ -404,9 +409,7 @@
         </div>
     </div>
 
-     </div>
-
-   <div class="page-panel" id="panel-7">
+    <div class="page-panel" id="panel-7">
         <button class="back-btn" onclick="closePanel()">⬅ ব্যাক করুন</button>
         <h2>ওয়েব ডেভলপার</h2>
         
@@ -432,14 +435,13 @@
         </ul>
     </div>
 
-
     <div id="complaint-box-widget">
         <div class="complaint-title-btn" id="complaint-toggle-btn">✉️ অভিযোগ বক্স</div>
         <div id="complaint-form">
             <h4 style="margin-top:0;">শাহিন মুস্তাফা কে আপনি কি কি অভিযোগ জানাতে চান তা এখানে লিখুন:</h4>
-            <textarea placeholder="এখানে অভিযোগ লিখুন (১০০০ শব্দ)..."></textarea>
+            <textarea id="complaint-text" placeholder="এখানে অভিযোগ লিখুন (১০০০ শব্দ)..."></textarea>
             <input type="file" style="margin-bottom: 10px; width: 100%;">
-            <button onclick="alert('অভিযোগ জমা দেওয়া হয়েছে!')">জমা দিন</button>
+            <button onclick="submitComplaint()">জমা দিন</button>
             <hr>
             <button class="view-complaints-btn" onclick="viewComplaints()">অভিযোগ দেখুন (Admin)</button>
         </div>
@@ -447,11 +449,11 @@
 
     <footer class="ios-dock-container">
         <div class="ios-social-grid">
-            <a href="https://www.facebook.com/profile.php?id=100068679007563" target="_blank" class="ios-app-link fb-app" title="Facebook">📘</a>
-            <a href="https://youtube.com/@shahinmostafa9898" target="_blank" class="ios-app-link yt-app" title="YouTube">📺</a>
-            <a href="https://wa.me/8801842330673" target="_blank" class="ios-app-link wa-app" title="WhatsApp">💬</a>
-            <a href="tel:01842330673" class="ios-app-link tg-app" title="Telegram/Imo">📱</a>
-            <a href="https://www.linkedin.com/in/shahin-sultan-a78bb1257" target="_blank" class="ios-app-link li-app" title="LinkedIn">💼</a>
+            <a href="https://www.facebook.com/profile.php?id=100068679007563" target="_blank" class="ios-app-link fb-app" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://youtube.com/@shahinmostafa9898" target="_blank" class="ios-app-link yt-app" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/8801842330673" target="_blank" class="ios-app-link wa-app" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:01842330673" class="ios-app-link tg-app" title="Telegram/Imo"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://www.linkedin.com/in/shahin-sultan-a78bb1257" target="_blank" class="ios-app-link li-app" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="last-update" id="update-date">সর্বশেষ আপডেট: </div>
     </footer>
@@ -486,7 +488,7 @@
             window.scrollTo(0, 0);
         }
 
-        // 3. Image Slider Core Logic (Responsive)
+        // 3. Image Slider Core Logic
         const slider = document.getElementById('slider');
         const sliderContainer = document.getElementById('slider-container');
         let slideIndex = 0;
@@ -528,11 +530,35 @@
             complaintForm.style.display = complaintForm.style.display === 'block' ? 'none' : 'block';
         });
 
-        // 5. Admin Panel Security
+        // 5. Complaint Logic (Save and View)
+        function submitComplaint() {
+            let text = document.getElementById('complaint-text').value;
+            if(text.trim() === "") {
+                alert("দয়া করে কিছু লিখুন!");
+                return;
+            }
+            // লোকাল স্টোরেজে সংরক্ষণ
+            let complaints = JSON.parse(localStorage.getItem('shahin_complaints') || "[]");
+            complaints.push({ date: new Date().toLocaleString('bn-BD'), text: text });
+            localStorage.setItem('shahin_complaints', JSON.stringify(complaints));
+            
+            alert("অভিযোগ সফলভাবে জমা দেওয়া হয়েছে!");
+            document.getElementById('complaint-text').value = ""; // বক্স ক্লিয়ার করা
+        }
+
         function viewComplaints() {
             let pass = prompt("পাসওয়ার্ড দিন:");
             if(pass === "sultan@#3876") {
-                alert("স্বাগতম শাহিন মোস্তাফা! আপনার অভিযোগের তালিকা লোড হচ্ছে...");
+                let complaints = JSON.parse(localStorage.getItem('shahin_complaints') || "[]");
+                if(complaints.length === 0) {
+                    alert("স্বাগতম স্যার! আপনার কোনো অভিযোগ জমা পড়েনি।");
+                } else {
+                    let msg = "স্বাগতম স্যার! আপনার অভিযোগের তালিকা:\n\n";
+                    complaints.forEach((c, i) => {
+                        msg += (i + 1) + ". তারিখ: " + c.date + "\n" + c.text + "\n\n";
+                    });
+                    alert(msg);
+                }
             } else {
                 alert("ভুল পাসওয়ার্ড!");
             }
@@ -567,20 +593,20 @@
         // Dynamic Last Modified Date
         document.getElementById('update-date').innerText += " " + new Date(document.lastModified).toLocaleDateString('bn-BD');
     </script>
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'bn', includedLanguages: 'bn,en,ar,es,hi', autoDisplay: false}, 'google_translate_element');
-    }
-    function toggleDropdown() { document.getElementById("langMenu").classList.toggle("show"); }
-    function changeLanguage(langCode) {
-        var selectField = document.querySelector(".goog-te-combo");
-        if (selectField) {
-            selectField.value = langCode;
-            selectField.dispatchEvent(new Event('change'));
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'bn', includedLanguages: 'bn,en,ar,es,hi', autoDisplay: false}, 'google_translate_element');
         }
-        document.getElementById("langMenu").classList.remove("show");
-    }
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        function toggleDropdown() { document.getElementById("langMenu").classList.toggle("show"); }
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+            document.getElementById("langMenu").classList.remove("show");
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
